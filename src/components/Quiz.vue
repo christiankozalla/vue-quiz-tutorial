@@ -39,12 +39,11 @@ export default {
         return question;
       });
       this.questions = data;
+      this.loading = false;
     },
   },
   mounted() {
-    this.fetchQuestions().then(() => {
-      this.loading = false;
-    });
+    this.fetchQuestions();
   },
 };
 </script>
