@@ -1,24 +1,36 @@
-# vue-quiz-tutorial
+# Vue Tutorial - Build a Frontend Quiz App
 
-## Project setup
+## headsUP is a Frontend Quiz App made with [Vue.js](https://vuejs.org), the [Trivia API](https://opentdb.com/), and of course :heart:
+
+This is the Starter-Code you need to follow along with the [written tutorial](https://devdiary.me/posts/vue-tutotial-frontend-quiz-app-headsup)!
+
+## How to build your Vue.js Quiz App
+
+1. Clone this Repository to your computer
+
 ```
+git clone https://github.com/christiankozalla/vue-quiz-tutorial.git
+```
+
+2. Open the Project with the Editor of your choice e.g. VS Code
+
+3. Install Dependencies
+
+```
+# Inside the project folder 'vue-quiz-tutorial'
 npm install
 ```
 
-### Compiles and hot-reloads for development
+4. Run the Starter Code
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+View the Starter Preview on localhost:8080
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Start Coding
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Follow along the [written tutorial](https://devdiary.me/posts/vue-tutotial-frontend-quiz-app-headsup) on my Blog [devdiary.me](https://devdiary.me)
+
+In case you want to reach out to me via Email: <devdiary.blog@gmail.com>
