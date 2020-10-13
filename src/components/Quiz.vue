@@ -5,9 +5,8 @@
     <!-- div#correctAnswers -->
     <hr class="divider" />
     <div v-if="loading">Loading...</div>
-    <div v-else>
+    <div v-else v-html="questions[0].question">
       <!-- Only first Question is displayed -->
-      {{ questions[0].question }}
     </div>
 
     <hr class="divider" />
