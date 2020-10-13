@@ -6,9 +6,7 @@ This is the Starter-Code you need to follow along with the [written tutorial](ht
 
 ## Finished Quiz App Live
 
-You can preview the Quiz App running live!
-
-https://vue-quiz-app.christiankozalla.vercel.app/
+You can preview the Quiz App [running Live here](https://vue-quiz-app.christiankozalla.vercel.app/)!
 
 ## How to build your Vue.js Quiz App
 
