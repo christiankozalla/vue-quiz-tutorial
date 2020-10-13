@@ -4,8 +4,12 @@
     <h1 id="logo-headline">headsUP</h1>
     <!-- div#correctAnswers -->
     <hr class="divider" />
-    <!-- question div -->
-    Questions HTML here
+    <div v-if="loading">Loading...</div>
+    <div v-else>
+      <!-- Only first Question is displayed -->
+      {{ questions[0].question }}
+    </div>
+
     <hr class="divider" />
   </div>
 </template>
@@ -13,6 +17,35 @@
 <script>
 export default {
   name: "Quiz",
+  data() {
+    return {
+      questions: [],
+      loading: true,
+    };
+  },
+  methods: {
+    async fetchQuestions() {
+      this.loading = true;
+      let response = await fetch(
+        "https://opentdb.com/api.php?amount=10&category=9"
+      );
+      let jsonResponse = await response.json();
+      let data = jsonResponse.results.map((question) => {
+        // put answers on question into single array
+        question.answers = [
+          question.correct_answer,
+          ...question.incorrect_answers,
+        ];
+        return question;
+      });
+      this.questions = data;
+    },
+  },
+  mounted() {
+    this.fetchQuestions().then(() => {
+      this.loading = false;
+    });
+  },
 };
 </script>
 
