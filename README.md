@@ -4,6 +4,12 @@
 
 This is the Starter-Code you need to follow along with the [written tutorial](https://devdiary.me/posts/vue-tutotial-frontend-quiz-app-headsup)!
 
+## Finished Quiz App Live
+
+You can preview the Quiz App running live!
+
+https://vue-quiz-app.christiankozalla.vercel.app/
+
 ## How to build your Vue.js Quiz App
 
 1. Clone this Repository to your computer
