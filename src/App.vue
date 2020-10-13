@@ -1,28 +1,48 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Quiz />
+    <footer>
+      <p id="createdBy">
+        created by <a href="https://devdiary.me">Christian Kozalla</a>
+      </p>
+    </footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Quiz from "@/components/Quiz.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Quiz,
+  },
+};
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  font-size: 0.7rem;
+  background-color: rgb(102, 255, 166);
+}
+
+#createdBy {
+  float: right;
 }
 </style>
