@@ -72,7 +72,6 @@ export default {
     handleButtonClick: function(event) {
       /* Find index to identiy question object in data */
       let index = event.target.getAttribute("index");
-      console.log(index);
       let pollutedUserAnswer = event.target.innerHTML; // innerHTML is polluted with decoded HTML entities e.g ' from &#039;
       /* Clear from pollution with ' */
       let userAnswer = pollutedUserAnswer.replace(/'/, "&#039;");
