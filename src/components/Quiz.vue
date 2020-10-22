@@ -52,6 +52,14 @@ export default {
           question.correct_answer,
           ...question.incorrect_answers,
         ];
+        /* Shuffle question.answers array */
+        for (let i = question.answers.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [question.answers[i], question.answers[j]] = [
+            question.answers[j],
+            question.answers[i],
+          ];
+        }
         // mention in Step 1
         question.rightAnswer = null;
         question.key = index;
