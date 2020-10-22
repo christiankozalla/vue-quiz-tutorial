@@ -2,7 +2,6 @@
   <div id="quiz-container">
     <img id="logo-crown" src="@/assets/crown.svg" alt="headsUP Crown" />
     <h1 id="logo-headline">headsUP</h1>
-    <!-- div#correctAnswers -->
     <hr class="divider" />
     <!-- question div -->
     Questions HTML here
