@@ -45,16 +45,77 @@ export default {
         "https://opentdb.com/api.php?amount=10&category=9"
       );
       let jsonResponse = await response.json();
+      let index = 0; // index is used to identify single answer
       let data = jsonResponse.results.map((question) => {
         // put answers on question into single array
         question.answers = [
           question.correct_answer,
           ...question.incorrect_answers,
         ];
+        // mention in Step 1
+        question.rightAnswer = null;
+        question.key = index;
+        index++;
         return question;
       });
       this.questions = data;
       this.loading = false;
+    },
+    handleButtonClick: function(event) {
+      /* Find index to identiy question object in data */
+      let index = event.target.getAttribute("index");
+      console.log(index);
+      let pollutedUserAnswer = event.target.innerHTML; // innerHTML is polluted with decoded HTML entities e.g ' from &#039;
+      /* Clear from pollution with ' */
+      let userAnswer = pollutedUserAnswer.replace(/'/, "&#039;");
+
+      /* Set userAnswer on question object in data */
+      this.questions[index].userAnswer = userAnswer;
+
+      /* Set class "clicked" on button with userAnswer -> for CSS Styles; Disable other sibling buttons */
+      event.target.classList.add("clicked");
+      let allButtons = document.querySelectorAll(`[index="${index}"]`);
+
+      for (let i = 0; i < allButtons.length; i++) {
+        if (allButtons[i] === event.target) continue;
+
+        allButtons[i].setAttribute("disabled", "");
+      }
+
+      /* Invoke checkAnswer to check Answer */
+      this.checkAnswer(event, index);
+    },
+    checkAnswer: function(event, index) {
+      let question = this.questions[index];
+
+      if (question.userAnswer) {
+        if (this.index < this.questions.length - 1) {
+          setTimeout(
+            function() {
+              this.index += 1;
+            }.bind(this),
+            3000
+          );
+        }
+        if (question.userAnswer === question.correct_answer) {
+          /* Set class on Button if user answered right, to celebrate right answer with animation joyfulButton */
+          event.target.classList.add("rightAnswer");
+          /* Set rightAnswer on question to true, computed property can track a streak out of 10 questions */
+          this.questions[index].rightAnswer = true;
+        } else {
+          /* Mark users answer as wrong answer */
+          event.target.classList.add("wrongAnswer");
+          this.questions[index].rightAnswer = false;
+          /* Show right Answer */
+          let correctAnswer = this.questions[index].correct_answer;
+          let allButtons = document.querySelectorAll(`[index="${index}"]`);
+          allButtons.forEach(function(button) {
+            if (button.innerHTML === correctAnswer) {
+              button.classList.add("showRightAnswer");
+            }
+          });
+        }
+      }
     },
   },
   mounted() {
@@ -136,5 +197,61 @@ button:focus {
 
 button:active:enabled {
   transform: scale(1.05);
+}
+
+@keyframes flashButton {
+  0% {
+    opacity: 1;
+    transform: scale(1.01);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+button.clicked {
+  pointer-events: none;
+}
+
+button.rightAnswer {
+  animation: flashButton;
+  animation-duration: 700ms;
+  animation-delay: 200ms;
+  animation-iteration-count: 3;
+  animation-timing-function: ease-in-out;
+  color: black;
+  background: linear-gradient(
+    210deg,
+    rgba(0, 178, 72, 0.25),
+    rgba(0, 178, 72, 0.5)
+  );
+}
+
+button.wrongAnswer {
+  color: black;
+  background: linear-gradient(
+    210deg,
+    rgba(245, 0, 87, 0.25),
+    rgba(245, 0, 87, 0.5)
+  );
+}
+
+button.showRightAnswer {
+  animation: flashButton;
+  animation-duration: 700ms;
+  animation-delay: 200ms;
+  animation-iteration-count: 2;
+  animation-timing-function: ease-in-out;
+  color: black;
+  background: linear-gradient(
+    210deg,
+    rgba(0, 178, 72, 0.25),
+    rgba(0, 178, 72, 0.5)
+  );
 }
 </style>
