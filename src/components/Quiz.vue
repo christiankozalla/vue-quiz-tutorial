@@ -4,12 +4,19 @@
     <h1 id="logo-headline">headsUP</h1>
     <!-- div#correctAnswers -->
     <hr class="divider" />
-    <div v-if="loading">Loading...</div>
-    <div v-else v-html="questions[0].question">
-      <!-- Only first Question is displayed -->
+    <div>
+      <h1 v-html="loading ? 'Loading...' : currentQuestion.question"></h1>
+      <form v-if="currentQuestion">
+        <button
+          v-for="answer in currentQuestion.answers"
+          :index="currentQuestion.key"
+          :key="answer"
+          v-html="answer"
+          @click.prevent="handleButtonClick"
+        ></button>
+      </form>
+      <hr class="divider" />
     </div>
-
-    <hr class="divider" />
   </div>
 </template>
 
@@ -20,7 +27,16 @@ export default {
     return {
       questions: [],
       loading: true,
+      index: 0,
     };
+  },
+  computed: {
+    currentQuestion() {
+      if (this.questions !== []) {
+        return this.questions[this.index];
+      }
+      return null;
+    },
   },
   methods: {
     async fetchQuestions() {
@@ -87,5 +103,38 @@ h1 {
   border: 3px solid rgba(102, 255, 166, 0.7);
   border-radius: 2px;
   box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  font-size: 1.1rem;
+  box-sizing: border-box;
+  padding: 1rem;
+  margin: 0.3rem;
+  width: 47%;
+  background-color: rgba(100, 100, 100, 0.3);
+  border: none;
+  border-radius: 0.4rem;
+  box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:hover:enabled {
+  transform: scale(1.02);
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active:enabled {
+  transform: scale(1.05);
 }
 </style>
