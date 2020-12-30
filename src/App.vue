@@ -1,9 +1,17 @@
 <template>
   <div id="app">
-    <Quiz />
+    <Quiz @quiz-completed="handleQuizCompleted" :key="quizKey" />
+    <Modal
+      v-show="showModal"
+      header="Congratulations!"
+      subheader="You've completed your Quiz!"
+      v-bind:quizScore="quizScore"
+      @reload="updateQuiz"
+      @close="showModal = false"
+    />
     <footer>
       <p id="createdBy">
-        created by <a href="https://devdiary.me">Christian Kozalla</a>
+        created by <a href="https://chrisko.io">Christian Kozalla</a>
       </p>
     </footer>
   </div>
@@ -11,11 +19,34 @@
 
 <script>
 import Quiz from "@/components/Quiz.vue";
+import Modal from "@/components/Modal.vue";
 
 export default {
   name: "App",
   components: {
     Quiz,
+    Modal,
+  },
+  data() {
+    return {
+      quizKey: 0,
+      showModal: false,
+      quizScore: {
+        allQuestions: 0,
+        answeredQuestions: 0,
+        correctlyAnsweredQuestions: 0,
+      },
+    };
+  },
+  methods: {
+    handleQuizCompleted(score) {
+      this.quizScore = score;
+      this.showModal = true;
+    },
+    updateQuiz() {
+      this.showModal = false;
+      this.quizKey++;
+    },
   },
 };
 </script>

@@ -2,7 +2,15 @@
   <div id="quiz-container">
     <img id="logo-crown" src="@/assets/crown.svg" alt="headsUP Crown" />
     <h1 id="logo-headline">headsUP</h1>
-    <!-- div#correctAnswers -->
+    <!-- New Section for User Statistics -->
+    <div class="correctAnswers">
+      You have
+      <strong>{{ correctAnswers }} correct {{ pluralizeAnswer }}!</strong>
+    </div>
+    <div class="correctAnswers">
+      Currently at question {{ index + 1 }} of {{ questions.length }}
+    </div>
+
     <hr class="divider" />
     <div>
       <h1 v-html="loading ? 'Loading...' : currentQuestion.question"></h1>
@@ -36,6 +44,80 @@ export default {
         return this.questions[this.index];
       }
       return null;
+    },
+    score() {
+      if (this.questions !== []) {
+        // Here, we want to collect data in an object about the users statistics - later be emitted on an event when users finishes quiz
+        return {
+          allQuestions: this.questions.length,
+          answeredQuestions: this.questions.reduce((count, currentQuestion) => {
+            if (currentQuestion.userAnswer) {
+              // userAnswer is set when user has answered a question, no matter if right or wrong
+              count++;
+            }
+            return count;
+          }, 0),
+          correctlyAnsweredQuestions: this.questions.reduce(
+            (count, currentQuestion) => {
+              if (currentQuestion.rightAnswer) {
+                // rightAnswer is true, if user answered correctly
+                count++;
+              }
+              return count;
+            },
+            0
+          ),
+        };
+      } else {
+        return {
+          allQuestions: 0,
+          answeredQuestions: 0,
+          correctlyAnsweredQuestions: 0,
+        };
+      }
+    },
+    correctAnswers() {
+      if (this.questions && this.questions.length > 0) {
+        let streakCounter = 0;
+        this.questions.forEach(function(question) {
+          if (!question.rightAnswer) {
+            return;
+          } else if (question.rightAnswer === true) {
+            streakCounter++;
+          }
+        });
+        return streakCounter;
+      } else {
+        return "--";
+      }
+    },
+    pluralizeAnswer() {
+      // For grammatical correctness
+      return this.correctAnswers === 1 ? "Answer" : "Answers";
+    },
+    quizCompleted() {
+      if (this.questions.length === 0) {
+        return false;
+      }
+      /* Check if all questions have been answered */
+      let questionsAnswered = 0;
+      this.questions.forEach(function(question) {
+        question.rightAnswer !== null ? questionsAnswered++ : null;
+      });
+      return questionsAnswered === this.questions.length;
+    },
+  },
+  watch: {
+    quizCompleted(completed) {
+      /*
+       * Watcher on quizCompleted fires event "quiz-completed"
+       * up to parent App.vue component when completed parameter
+       * returned by quizCompleted computed property true
+       */
+      completed &&
+        setTimeout(() => {
+          this.$emit("quiz-completed", this.score);
+        }, 3000); // wait 3 seconds until button animation is over
     },
   },
   methods: {
@@ -260,5 +342,9 @@ button.showRightAnswer {
     rgba(0, 178, 72, 0.25),
     rgba(0, 178, 72, 0.5)
   );
+}
+
+.correctAnswers {
+  text-align: center;
 }
 </style>
