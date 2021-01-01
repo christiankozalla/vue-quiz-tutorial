@@ -32,12 +32,15 @@
               Wanna choose another category?
 
               <a
-                href="https://twitter.com/messages/compose?recipient_id=1315961855148523521&text=Hello%20Christian,%20I%20would%20like%20to%20choose%20other%20categories%20with%20headsUP"
-                class="twitter-dm-button anchor-footer"
+                href="https://twitter.com/messages/compose?recipient_id=1315961855148523521&text=Hello%20Christian%20I%20would%20like%20to%20choose%20other%20categories%20with%20headsUP"
+                class="twitter-dm-button"
                 data-screen-name="@CKozalla"
-                ><button class="button-footer" style="margin-left: 2rem;">
-                  Demand that feature!
-                </button>
+              >
+                <img
+                  src="@/assets/Twitter_Logo_WhiteOnBlue.png"
+                  alt="Twitter Logo"
+                  class="twitter-logo"
+                />Demand that feature!
               </a>
             </div>
           </div>
@@ -120,7 +123,10 @@ export default {
 }
 
 .modal-body {
+  display: flex;
+  flex-direction: column;
   margin: 20px 0;
+  line-height: 3rem;
 }
 
 .modal-body > * {
@@ -163,6 +169,33 @@ export default {
   border-radius: 4px;
   background-color: rgba(187, 0, 47, 0.3);
   padding: 0.25rem 0.5rem;
+}
+
+.twitter-dm-button {
+  display: flex;
+  justify-content: space-between;
+  width: 280px;
+  background-color: #1da1f2;
+  padding: 0 2rem;
+  border-radius: 7px;
+  text-decoration: none;
+  color: black;
+  margin: 0 auto;
+}
+
+.twitter-logo {
+  width: 48px;
+  height: 48px;
+}
+
+#score {
+  background-color: rgb(210, 200, 200);
+  border-radius: 5px;
+  box-shadow: 2px 3px 9px gray;
+}
+
+#chooseCategory {
+  text-align: center;
 }
 
 /*
