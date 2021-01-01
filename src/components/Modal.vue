@@ -75,9 +75,6 @@ export default {
     subheader: String,
     quizScore: Object,
   },
-  methods: {
-    demandCategoryFeature() {},
-  },
 };
 </script>
 
