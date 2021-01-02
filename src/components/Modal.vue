@@ -1,6 +1,6 @@
 <template>
-  <transition name="modal"
-    ><div class="modal-mask">
+  <transition name="modal">
+    <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
@@ -11,21 +11,21 @@
           <div class="modal-body">
             <div id="score">
               You answered
-              <span class="highlight"
-                >{{
+              <span class="highlight">
+                {{
                   Math.floor(
                     (quizScore.correctlyAnsweredQuestions /
                       quizScore.allQuestions) *
                       100
                   )
                 }}
-                % correctly!</span
-              >
+                % correctly!
+              </span>
               Answered
-              <span class="highlight"
-                >{{ quizScore.correctlyAnsweredQuestions }} out of
-                {{ quizScore.answeredQuestions }}</span
-              >
+              <span class="highlight">
+                {{ quizScore.correctlyAnsweredQuestions }} out of
+                {{ quizScore.answeredQuestions }}
+              </span>
               questions.
             </div>
             <div id="chooseCategory">
