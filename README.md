@@ -2,7 +2,7 @@
 
 ## headsUP is a Frontend Quiz App made with [Vue.js](https://vuejs.org), the [Trivia API](https://opentdb.com/), and of course :heart:
 
-This is the Starter-Code you need to follow along with the [written tutorial](https://devdiary.me/posts/vue-tutotial-frontend-quiz-app-headsup)!
+This is the Starter-Code you need to follow along with the [written tutorial](https://chrisko.io/posts/vue-tutorial-frontend-quiz-app-headsup)!
 
 ## How to build your Vue.js Quiz App
 
@@ -31,6 +31,6 @@ View the Starter Preview on localhost:8080
 
 ## Start Coding
 
-Follow along the [written tutorial](https://devdiary.me/posts/vue-tutotial-frontend-quiz-app-headsup) on my Blog [devdiary.me](https://devdiary.me)
+Follow along the [written tutorial](https://chrisko.io/posts/vue-tutorial-frontend-quiz-app-headsup) on my Blog [chrisko.io](https://chrisko.io)
 
 In case you want to reach out to me via Email: <devdiary.blog@gmail.com>
